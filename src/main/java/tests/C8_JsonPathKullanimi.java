@@ -36,29 +36,32 @@ public class C8_JsonPathKullanimi {
     @Test
     public void jSonPathKullanimi(){
 
-        JSONObject homeTel=new JSONObject();
-        homeTel.put("type", "home");
-        homeTel.put("number", "0123-4567-8910");
-
-        JSONObject iPhone=new JSONObject();
-        iPhone.put("type", "iPhone");
-        iPhone.put("number", "0123-4567-8910");
-
-        JSONArray phoneNumbers=new JSONArray();
-        phoneNumbers.put(0,iPhone);
-        phoneNumbers.put(1,homeTel);
-
-        JSONObject address=new JSONObject();
-        address.put("streetAddress", "naist street");
-        address.put( "city","Nara");
-        address.put("postalCode","630-0192");
-
-        JSONObject personalInfo=new JSONObject();
-        personalInfo.put("firstName", "John");
-        personalInfo.put("lastName","doe");
-        personalInfo.put( "age" ,26);
+     JSONObject homeTel=new JSONObject();
+     homeTel.put("type","home");
+     homeTel.put("number","0123-4567-8910");
 
 
+     JSONObject iPhone=new JSONObject();
+     iPhone.put("type","iPhone");
+     iPhone.put("type","0123-4567-8888");
+
+
+
+     JSONArray phoneNumbers=new JSONArray();
+     phoneNumbers.put(0,homeTel);
+     phoneNumbers.put(1,iPhone);
+
+     JSONObject adress=new JSONObject();
+     adress.put("streetAddress","naist street");
+     adress.put("city","Nara");
+     adress.put("postalCode","630-0192");
+
+     JSONObject personalInfo=new JSONObject();
+     personalInfo.put("firstName","John");
+     personalInfo.put("lastName","doe");
+     personalInfo.put("age","26");
+     personalInfo.put("address",adress);
+     personalInfo.put("phoneNumbers",phoneNumbers);
 
         System.out.println("İsim : "+personalInfo.get("firstName"));
         System.out.println("Soyisim : "+personalInfo.get("lastName"));
@@ -71,6 +74,9 @@ public class C8_JsonPathKullanimi {
                 +personalInfo.getJSONArray("phoneNumbers").getJSONObject(0).get("number")+"\n\t\t"
                 +personalInfo.getJSONArray("phoneNumbers").getJSONObject(1).get("type")+"-"
                 +personalInfo.getJSONArray("phoneNumbers").getJSONObject(1).get("number"));
+
+
+
 
 
 

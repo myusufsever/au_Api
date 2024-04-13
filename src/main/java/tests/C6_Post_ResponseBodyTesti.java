@@ -1,5 +1,6 @@
 package tests;
 
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -37,7 +38,7 @@ public class C6_Post_ResponseBodyTesti {
             reqBody.put("body","API ogrenmek ne guzel");
             reqBody.put("userId",10);
 
-        Response response=given().when().body(reqBody.toString()).post(url);
+        Response response=given().contentType(ContentType.JSON).when().body(reqBody.toString()).post(url);
 
         response.then().statusCode(201)
                 .contentType("application/json")

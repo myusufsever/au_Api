@@ -2,6 +2,7 @@ package tests;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 
@@ -43,41 +44,51 @@ public class C9_Post_JsonPathIleBodyTesti {
 
     public void JsonPathIleBodyTesti(){
 
-
-        String url="https://restful-booker.herokuapp.com/booking";
-
-        JSONObject dates=new JSONObject();
-
-        dates.put( "checkin" , "2021-06-01");
-        dates.put( "checkout" , "2021-06-10");
+       String url=" https://restful-booker.herokuapp.com/booking";
 
         JSONObject reqBody=new JSONObject();
-        reqBody.put("firstname" , "Ahmet");
-        reqBody.put( "lastname" ,"Bulut");
-        reqBody.put("totalprice" , 500);
-        reqBody.put("depositpaid" , false);
-        reqBody.put("bookingdates",dates);
-        reqBody.put("additionalneeds" , "wi-fi");
+
+        JSONObject bookingdates=new JSONObject();
+        bookingdates.put("checkin" , "2021-06-01");
+        bookingdates.put("checkout" , "2021-06-10");
+
+        reqBody.put("firstname","Ahmet");
+        reqBody.put("lastname","Bulut");
+        reqBody.put("totalprice","500");
+        reqBody.put("depositpaid","false");
+        reqBody.put("bookingdates",bookingdates );
+        reqBody.put( "additionalneeds" , "wi-fi");
 
         Response response=given().contentType(ContentType.JSON).when().body(reqBody.toString()).post(url);
-  // Response response=given().contentType(ContentType.JSON).when().body(reqBody.toString()).post(url);
+
+
+        //Response response=given().contentType(ContentType.JSON).when().body(reqBody.toString()).post(url);
+
+
         response.then().assertThat()
                 .statusCode(200).contentType("application/json")
-                                     .body("booking.firstname",equalTo("Ahmet"),
-                                             "booking.lastname",equalTo("Bulut"),"booking.totalprice",equalTo(500)
-                                                     ,"booking.depositpaid",equalTo(false),"booking.bookingdates.checkin",equalTo("2021-06-01"),
-                                                     "booking.bookingdates.checkout",equalTo("2021-06-10"),"booking.additionalneeds",equalTo("wi-fi"));
+                .body("booking.firstname", equalTo("Ahmet"),
+                "booking.lastname",equalTo("Bulut"),
+                "booking.totalprice",equalTo(500),
+                "booking.depositpaid",equalTo("false"),
+                "booking.bookingdates.checkin",equalTo("2021-06-01"),
+                "booking.bookingdates.checkout",equalTo("2021-06-10"),
+                "booking.additionalneeds",equalTo("wi-fi"));
+
+/*
+
+        response.then().assertThat()
+                            .statusCode(200).contentType("application/json")
+                                              .body("booking.firstname", equalTo("Ahmet"),
+                                              "booking.lastname", equalTo("Bulut"),
+                                                       "booking.totalprice", equalTo(500),
+                                                       "booking.depositpaid", equalTo(false),
+                                                       "booking.bookingdates.checkin", equalTo("2021-06-01"),
+                                                       "booking.bookingdates.checkout", equalTo("2021-06-10"),
+                                                       "booking.additionalneeds",equalTo("wi-fi"));
+ */
 
 
-
-        /*
-
-
-
-
-
-
-         */
 
 
 

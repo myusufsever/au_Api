@@ -37,7 +37,7 @@ ve response suresinin 5 sn'den kisa oldugunu manuel olarak test ediniz.
 
         response.prettyPrint();
 
-        System.out.println("Status code" + response.getStatusCode());
+        System.out.println("Status code " + response.getStatusCode());
         System.out.println("Content Type" + response.getContentType());
         System.out.println("Status Line" + response.statusLine());
         System.out.println("Header/Server:"+response.getHeader("Server"));
