@@ -48,24 +48,34 @@ public class C12_Post_ExpectedDataVeJsonPathIleAssertion {
          */
 
 
-
     @Test
-    public void expBodyPostaTesti(){
+    public void expBodyPostTesti(){
 
-
-        String url=" https://restful-booker.herokuapp.com/booking";
-
+        //1-Endpoint ve Request Body hazırlama
+        String url="https://restful-booker.herokuapp.com/booking";
+        /*
+        "firstname" : "Hasan",
+        "lastname" : "Yagmur",
+        "totalprice" : 500,
+        "depositpaid" : false,
+        "bookingdates" : {
+            "checkin" : "2021-06-01",
+            "checkout" : "2021-06-10"
+            },
+        "additionalneeds" : "wi-fi"
+         */
         JSONObject innerData=new JSONObject();
-        innerData.put( "checkin","2021-06-01");
-        innerData.put( "checkout" , "2021-06-10");
+        innerData.put("checkin" , "2021-06-01");
+        innerData.put("checkout" , "2021-06-10");
 
         JSONObject reqBody=new JSONObject();
         reqBody.put("firstname" , "Hasan");
-        reqBody.put("lastname" ,"Yagmur");
+        reqBody.put("lastname" , "Yagmur");
         reqBody.put("totalprice" , 500);
         reqBody.put("depositpaid" , false);
         reqBody.put("bookingdates" , innerData);
-        reqBody.put("additionalneeds","wi-fi");
+        reqBody.put("additionalneeds" , "wi-fi");
+
 
         //2-ExpBody hazırlama
         JSONObject expBody=new JSONObject();
@@ -78,49 +88,22 @@ public class C12_Post_ExpectedDataVeJsonPathIleAssertion {
 
         //response.prettyPrint();
         //4-Assertion yapma (assertEqual(expected,respons)
-
-        JsonPath resJp=response.jsonPath();
-
+        JsonPath respJP=response.jsonPath();
 
 
-
-        assertEquals(expBody.getJSONObject("booking").get("firstname"),  resJp.get("booking.firstname"));
-        assertEquals(expBody.getJSONObject("booking").get("firstname"),resJp.get("booking.lastname"));
-        assertEquals(expBody.getJSONObject("booking").get("totalprice"),resJp.get("booking.totalprice"));
-        assertEquals(expBody.getJSONObject("booking").get("depositpaid"),resJp.get("booking.depositpaid"));
-        assertEquals(expBody.getJSONObject("booking").getJSONObject("bookingdates").get("checkin"),resJp.get("booking.bookingdates.checkin"));
-        assertEquals(expBody.getJSONObject("booking").getJSONObject("bookingdates").get("checkout"),resJp.get("booking.bookingdates.checkout"));
-        assertEquals(expBody.getJSONObject("booking").get("additionalneeds"),resJp.get("booking.additionalneeds"));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        assertEquals(expBody.getJSONObject("booking").get("firstname"),respJP.get("booking.firstname"));
+        assertEquals(expBody.getJSONObject("booking").get("lastname"),respJP.get("booking.lastname"));
+        assertEquals(expBody.getJSONObject("booking").get("totalprice"),respJP.get("booking.totalprice"));
+        assertEquals(expBody.getJSONObject("booking").get("depositpaid"),respJP.get("booking.depositpaid"));
+        assertEquals(expBody.getJSONObject("booking").getJSONObject("bookingdates").get("checkin"),respJP.get("booking.bookingdates.checkin"));
+        assertEquals(expBody.getJSONObject("booking").getJSONObject("bookingdates").get("checkout"),respJP.get("booking.bookingdates.checkout"));
+        assertEquals(expBody.getJSONObject("booking").get("additionalneeds"),respJP.get("booking.additionalneeds"));
 
 
     }
 
 
-
-
-
-
-
-
-
-
-
 }
+
+
+

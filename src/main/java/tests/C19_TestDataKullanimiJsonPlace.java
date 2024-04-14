@@ -38,21 +38,22 @@ public class C19_TestDataKullanimiJsonPlace  extends BaseUrlJsonPlaceUrl {
     @Test
     public void test01(){
         //1-Endpoint ve RequestBody varsa hazırlamak
-        specJsonPlaceHolder.pathParams("pp1","posts","pp2","22");
+        specJsonPlaceHolder.pathParams("pp1","posts","pp2",22);
 
         //2-ExpectedBody Hazırlama
-        JSONObject expBody= JsonPlaceData.expectedDataOlustur22();
+        JSONObject expBody=JsonPlaceData.expectedDataOlustur22();
 
 
-        Response response=given().when().spec(specJsonPlaceHolder).get("{pp1}/{pp2}");
 
-        JsonPath resJP=response.jsonPath();
+        Response response=given().when().spec(specJsonPlaceHolder).get("{pp1}{pp2}");
+
+        JsonPath respJP=response.jsonPath();
+
         assertEquals(JsonPlaceData.basariliSC,response.getStatusCode());
-        assertEquals(expBody.getInt("userId"),resJP.getInt("userId"));
-        assertEquals(expBody.getInt("id"),resJP.getInt("id"));
-        assertEquals(expBody.getString("title"),resJP.getString("title"));
-        assertEquals(expBody.getString("body"),resJP.getString("body"));
-
+        assertEquals(expBody.getInt("userId"),respJP.getInt("userId"));
+        assertEquals(expBody.getInt("id"),respJP.getInt("id"));
+        assertEquals(expBody.getString("title"),respJP.getString("title"));
+        assertEquals(expBody.getString("body"),respJP.getString("body"));
 
         
 

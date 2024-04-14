@@ -26,14 +26,18 @@ public class C15_baseUrlHerOkuAppQueryParam extends BaseUrlHerOkuApp {
 
     public void  baseUrlQuery(){
 
-        specHerOkuApp.pathParam("pp1","booking").queryParam("firstname","Jim");
+      specHerOkuApp.pathParam("pp1","booking")
+              .queryParam("firstname","Suzan");
+
+
+
 
         Response response=given().when().spec(specHerOkuApp).get("/{pp1}");
 
         //response.prettyPrint();
 
-
-        response.then().assertThat().statusCode(200).body("bookingid", Matchers.hasItem(305));
+      response.then().assertThat()
+        .statusCode(200).body("bookingid",Matchers.hasItem(305));
 
 
 

@@ -17,30 +17,21 @@ public class C14_baseUrlHerOkuApp extends BaseUrlHerOkuApp {
 
      */
 
-    public void test01( ){
+    public void test01(){
 
         //1-EndPoint ve reqBody hazırlama hazırlama
-        specHerOkuApp.pathParam("pp1","booking");
-
+       specHerOkuApp.pathParam("pp1","booking");
         //2-expBody hazırlama
-
-        //3-response kaydet
 
         Response response=given().when().spec(specHerOkuApp).get("/{pp1}");
 
+        //3-response kaydet
 
-        response.then().assertThat().statusCode(200).body("bookingid", Matchers.hasItem(51));
-
-
+        response.then().assertThat().statusCode(200).body("bookingid",Matchers.hasItem(51));
 
 
 
     }
-
-
-
-
-
 
 
 }
